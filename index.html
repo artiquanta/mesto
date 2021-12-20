@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./pages/index.css">
+  <title>Mesto: Russia</title>
+</head>
+
+<body>
+  <div class="page">
+    <header class="header page__header">
+      <div class="header__logo"></div>
+    </header>
+    <main class="content">
+      <section class="profile content__profile">
+        <div class="profile__info">
+          <div class="profile__avatar"></div>
+          <div class="profile__author-info">
+            <div class="profile__control">
+              <h1 class="profile__author">Жак-Ив Кусто</h1>
+              <button class="profile__edit-btn"></button>
+            </div>
+            <p class="profile__activity">Исследователь океана</p>
+          </div>
+        </div>
+        <button class="profile__add-btn"></button>
+        <div class="popup">
+          <div class="popup__container">
+            <button class="popup__close-btn">&#10006;</button>
+            <form class="popup__inputs">
+              <h2 class="popup__heading">Редактировать профиль</h2>
+              <input type="text" class="popup__input popup__input_type_author">
+              <input type="text" class="popup__input popup__input_type_activity">
+              <button class="popup__submit-btn" type="submit">Сохранить</button>
+            </form>
+          </div>
+        </div>
+      </section>
+      <section class="cards-grid">
+        <ul class="cards cards-grid__cards">
+          <li class="cards__item">
+            <img class="cards__image" src="./images/cards__baikal.jpg" alt="Озеро Байкал зимой.">
+            <div class="cards__description">
+              <h2 class="cards__place">Озеро Байкал</h2>
+              <button class="cards__like-btn"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/cards__ruskeala.jpg"
+              alt="Мраморные озёра Рускеала, Республика Карелия.">
+            <div class="cards__description">
+              <h2 class="cards__place">Мраморные озёра Рускеала, Республика Карелия</h2>
+              <button class="cards__like-btn cards__like-btn_active"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/cards__bermamyt.jpg"
+              alt="Плато Бермамыт, Карачаево-Черкесская Республика.">
+            <div class="cards__description">
+              <h2 class="cards__place">Плато Бермамыт</h2>
+              <button class="cards__like-btn"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/cards__baskunchak.jpg"
+              alt="Солёное озеро Баскунчак, Астраханская область.">
+            <div class="cards__description">
+              <h2 class="cards__place">Солёное озеро Баскунчак</h2>
+              <button class="cards__like-btn"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/cards__seliger.jpg" alt="Озеро ледникового происхождения Селигер.">
+            <div class="cards__description">
+              <h2 class="cards__place">Озеро ледникового происхождения Селигер</h2>
+              <button class="cards__like-btn"></button>
+            </div>
+          </li>
+          <li class="cards__item">
+            <img class="cards__image" src="./images/cards__stolby.jpg" alt="Национальный парк - Красноярские Столбы.">
+            <div class="cards__description">
+              <h2 class="cards__place">Красноярские Столбы</h2>
+              <button class="cards__like-btn"></button>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <footer class="footer">
+      <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+    </footer>
+  </div>
+  <script src="./scripts/index.js"></script>
+</body>
+
+</html>
