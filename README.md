@@ -18,4 +18,4 @@
 
 ## Ссылка на проектную работу
 
-Проектная работа доступна на странице [GitHub Pages](https://artiquanta.github.io/russian-travel/)
+Проектная работа доступна на странице [GitHub Pages](https://artiquanta.github.io/mesto/)
