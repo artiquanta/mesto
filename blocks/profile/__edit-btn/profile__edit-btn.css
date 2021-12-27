@@ -9,6 +9,7 @@
   background-size: 10px;
   background-position: center;
   background-repeat: no-repeat;
+  cursor: pointer;
   transition: .2s;
   flex-shrink: 0;
 }
