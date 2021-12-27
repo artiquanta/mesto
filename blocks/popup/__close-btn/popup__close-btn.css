@@ -6,10 +6,11 @@
   width: 32px;
   height: 32px;
   background: transparent;
-  color: #fff;
-  font-size: 32px;
-  line-height: 1;
+  background-image: url(../../../images/popup__close-btn.svg);
+  background-size: contain;
+  background-position: center;
   border: none;
+  cursor: pointer;
   transition: .2s;
 }
 
@@ -23,6 +24,5 @@
     right: 0;
     width: 20px;
     height: 20px;
-    font-size: 20px;
   } 
 }
