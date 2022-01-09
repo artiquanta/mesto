@@ -12,6 +12,7 @@
   background-repeat: no-repeat;
   border: none;
   cursor: pointer;
+  z-index: 1;
   transition: .2s;
 }
 
