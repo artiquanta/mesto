@@ -9,7 +9,6 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
-  z-index: 1;
   transition: .3s;
   z-index: 2;
 }
