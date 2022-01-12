@@ -1,9 +1,0 @@
-.popup__input_type_place {
-  margin-top: 54px;
-}
-
-@media screen and (max-width: 611px) {
-  .popup__input_type_place {
-    margin-top: calc(54px + ((611px - 100vw) * 0.072165));
-  }
-}
