@@ -51,36 +51,28 @@ function toggleLike(evt) {
 
 // Открытие Popup
 function openPopup(popup) {
-  clearingInputsErrors();
   popup.classList.add('popup_opened');
-  document.addEventListener('keydown', closeOverlay);
+  document.addEventListener('keydown', closeByEscape);
 }
 
 // Очистка полей ввода Popup Cards
-function clearInputsValues(popup) {
-  if (popup === popupCards) {
-    popupCardsPlace.value = '';
-    popupCardsLink.value = '';
-  }
-}
-
-// Закрытие Popup клавишей Escape
-function closeOverlay(evt) {
-  const currentPopup = document.querySelector('.popup_opened');
-  if (evt.key === 'Escape') {
-    closePopup(currentPopup);
-  }
+function clearInputsValues() {
+  popupCardsPlace.value = '';
+  popupCardsLink.value = '';
 }
 
 // Закрытие Popup 
 function closePopup(popup) {
   popup.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeOverlay);
-  clearInputsValues(popup);
+  document.removeEventListener('keydown', closeByEscape);
 }
 
-function removeOverlayKeyListener(overlay) {
-  overlay.removeEventListener('click', closeOverlay);
+// Закрытие Popup клавишей Escape
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const currentPopup = document.querySelector('.popup_opened');
+    closePopup(currentPopup);
+  }
 }
 
 // Инициализация Popup Image
@@ -99,8 +91,8 @@ function createCard(heading, link, alt) {
   const cardsRemoveBtn = cardsElement.querySelector('.cards__remove-btn');
   const cardsLikeBtn = cardsElement.querySelector('.cards__like-btn');
   const cardsImage = cardsElement.querySelector('.cards__image');
-  cardsElement.querySelector('.cards__image').src = link;
-  cardsElement.querySelector('.cards__image').alt = alt;
+  cardsImage.src = link;
+  cardsImage.alt = alt + '.';
   cardsElement.querySelector('.cards__place').textContent = heading;
   cardsRemoveBtn.addEventListener('click', removeCard);
   cardsLikeBtn.addEventListener('click', toggleLike);
@@ -138,6 +130,7 @@ function updateProfile() {
 function addCards() {
   renderCard(popupCardsPlace.value, popupCardsLink.value);
   closePopup(popupCards);
+  clearInputsValues();
 }
 
 // Первоначальное наполнение содержимым страницы
@@ -166,6 +159,7 @@ const clearingInputsErrors = renderPage();
 /* Open Popup Profile */
 profileEditBtn.addEventListener('click', () => {
   fillProfilePopup();
+  clearingInputsErrors();
   openPopup(popupProfile);
 });
 
@@ -184,6 +178,8 @@ popupProfileForm.addEventListener('submit', updateProfile);
 /* Popup Cards */
 // Open Popup Adding Cards
 profileAddBtn.addEventListener('click', () => {
+  clearInputsValues();
+  clearingInputsErrors();
   openPopup(popupCards);
 });
 

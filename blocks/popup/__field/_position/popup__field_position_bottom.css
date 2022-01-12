@@ -7,3 +7,9 @@
     margin-bottom: 45px;
   }
 }
+
+@media screen and (max-width: 611px) {
+  .popup__field_position_bottom {
+    margin-top: 53px;
+  }
+}
