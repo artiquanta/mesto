@@ -1,32 +1,26 @@
-const initialCards = [
+export default [
   {
-    name: 'Красноярские Столбы',
-    link: './images/cards__stolby.jpg',
-    alt: 'Национальный парк - Красноярские Столбы.'
+    title: 'Красноярские Столбы',
+    link: './images/cards__stolby.jpg'
   },
   {
-    name: 'Озеро ледникового происхождения Селигер',
-    link: './images/cards__seliger.jpg',
-    alt: 'Озеро ледникового происхождения Селигер.'
+    title: 'Озеро ледникового происхождения Селигер',
+    link: './images/cards__seliger.jpg'
   },
   {
-    name: 'Солёное озеро Баскунчак',
-    link: './images/cards__baskunchak.jpg',
-    alt: 'Солёное озеро Баскунчак, Астраханская область.'
+    title: 'Солёное озеро Баскунчак',
+    link: './images/cards__baskunchak.jpg'
   },
   {
-    name: 'Плато Бермамыт',
-    link: './images/cards__bermamyt.jpg',
-    alt: 'Плато Бермамыт, Карачаево-Черкесская Республика.'
+    title: 'Плато Бермамыт',
+    link: './images/cards__bermamyt.jpg'
   },
   {
-    name: 'Мраморные озёра Рускеала, Республика Карелия',
-    link: './images/cards__ruskeala.jpg',
-    alt: 'Мраморные озёра Рускеала, Республика Карелия.'
+    title: 'Мраморные озёра Рускеала, Республика Карелия',
+    link: './images/cards__ruskeala.jpg'
   },
   {
-    name: 'Озеро Байкал',
-    link: './images/cards__baikal.jpg',
-    alt: 'Озеро Байкал зимой.'
+    title: 'Озеро Байкал',
+    link: './images/cards__baikal.jpg'
   }
 ];
