@@ -1,14 +1,12 @@
-import openPopup from "./index.js";
-
 export default class Card {
-  constructor(data, cardSelector) {
+  constructor(data, cardSelector, callBack) {
     this._cardSelector = cardSelector;
     this._title = data.title;
     this._link = data.link;
-    this._alt = `${data.title}.`;
+    this._callBack = callBack;
   }
 
-  _getTemplate() {
+  _getTemplate() { // Получаем шаблон карточки
     const cardTemplateElement = document
       .querySelector(this._cardSelector)
       .content
@@ -17,40 +15,33 @@ export default class Card {
     return cardTemplateElement;
   }
 
-  _handlePopupInitialization() {
-    const popupImage = document.querySelector('.popup_type_image');
-    const popupImagePhoto = popupImage.querySelector('.popup__photo');
-    const popupImageCaption = popupImage.querySelector('.popup__caption');
-    popupImagePhoto.src = this._link;
-    popupImagePhoto.alt = this._alt;
-    popupImageCaption.textContent = this._title;
-    openPopup(popupImage);
-  }
-
-  _handleRemoveCard() {
+  _handleRemoveCard() { // удаление карточки
     this._cardElement.remove();
+    this._cardElement = null;
   }
 
-  _handleToggleLike() {
+  _handleToggleLike() { // изменение состояния сердечка на карточке
     this._cardElement.querySelector('.cards__like-btn').classList.toggle('cards__like-btn_active');
   }
 
-  _setEventListeners() {
+  _setEventListeners() { // добавление слушателей
     // Слушатель кнопки удаления карточки
     this._cardElement.querySelector('.cards__remove-btn').addEventListener('click', () => {
       this._handleRemoveCard();
     });
+
     // Слушатель кнопки сердечка
     this._cardElement.querySelector('.cards__like-btn').addEventListener('click', () => {
       this._handleToggleLike();
     });
+
     // Слушатель клика по изображению карточки
     this._cardElement.querySelector('.cards__image').addEventListener('click', () => {
-      this._handlePopupInitialization();
+      this._callBack(this._cardElement);
     })
   }
 
-  generateCard() {
+  generateCard() { // создание карточки
     this._cardElement = this._getTemplate();
     this._setEventListeners();
     this._cardElement.querySelector('.cards__place').textContent = this._title;

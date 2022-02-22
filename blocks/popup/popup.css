@@ -9,6 +9,9 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
+  font-family: 'Inter', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   transition: .3s;
   z-index: 2;
 }
