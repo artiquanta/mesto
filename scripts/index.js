@@ -39,6 +39,8 @@ const popupCardsLink = popupCardsContainer.querySelector('.popup__input_type_lin
 /* Popup Image */
 const popupImageContainer = popupImage.querySelector('.popup__container');
 const popupImageCloseBtn = popupImageContainer.querySelector('.popup__close-btn');
+const popupImagePhoto = popupImageContainer.querySelector('.popup__photo');
+const popupImageCaption = popupImageContainer.querySelector('.popup__caption');
 
 
 // Открытие Popup
@@ -80,28 +82,30 @@ function updateProfile() {
 }
 
 // Инициализация popupImage
-function initializePopupImage(card) { // править
-  const popupImagePlace = card.querySelector('.cards__place');
-  const popupImagePhoto = popupImageContainer.querySelector('.popup__photo');
-  const popupImagePlaceName = popupImagePlace.textContent;
-  const popupImageCaption = popupImageContainer.querySelector('.popup__caption');
-  popupImagePhoto.src = card.querySelector('.cards__image').src;
-  popupImagePhoto.alt = popupImagePlaceName + '.';
-  popupImageCaption.textContent = popupImagePlaceName;
+function initializePopupImage(title, link) {
+  popupImagePhoto.src = link;
+  popupImagePhoto.alt = title + '.';
+  popupImageCaption.textContent = title;
   openPopup(popupImage);
 }
 
-// Добавление новой карточки места
-function addCards(data) { // сделать универсальной
+// Создание разметки новой карточки места
+function addCards(data) {
   const newCard = new Card(data, '#cards-template', initializePopupImage);
   const cardElement = newCard.generateCard();
-  cards.prepend(cardElement);
+  return cardElement;
+}
+
+// Добавление разметки карточки
+function renderCard(addedCard) {
+  cards.prepend(addedCard);
 }
 
 // Добавление существующих карточек на страницу
 function fillPage() {
   initialCards.forEach(function (item) {
-    addCards(item);
+    const addedCard = addCards(item);
+    renderCard(addedCard);
   });
 }
 
@@ -159,8 +163,9 @@ popupCardsOverlay.addEventListener('click', () => {
 });
 
 // Добавление новой карточки
-popupCardsForm.addEventListener('submit', () => { // проверить и доработать
-  addCards({ title: popupCardsPlace.value, link: popupCardsLink.value });
+popupCardsForm.addEventListener('submit', () => {
+  const addedCard = addCards({ title: popupCardsPlace.value, link: popupCardsLink.value });
+  renderCard(addedCard);
   closePopup(popupCards);
   clearInputsValues();
 });

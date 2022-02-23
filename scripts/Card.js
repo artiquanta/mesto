@@ -37,7 +37,7 @@ export default class Card {
 
     // Слушатель клика по изображению карточки
     this._cardElement.querySelector('.cards__image').addEventListener('click', () => {
-      this._callBack(this._cardElement);
+      this._callBack(this._title, this._link);
     })
   }
 
