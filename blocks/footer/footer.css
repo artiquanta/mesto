@@ -1,14 +1,13 @@
 .footer {
   grid-area: footer;
-  max-width: 1280px;
-  width: 68.75vw;
+  max-width: 880px;
+  width: 100%;
   justify-self: center;
 }
 
 @media screen and (max-width: 1279px) {
   .footer {
     width: 90vw;
-    max-width: 880px;
   }
 }
 

@@ -46,7 +46,7 @@ export default class Card {
     this._setEventListeners();
     this._cardElement.querySelector('.cards__place').textContent = this._title;
     this._cardElement.querySelector('.cards__image').src = this._link;
-    this._cardElement.querySelector('.cards__image').alt = this._alt;
+    this._cardElement.querySelector('.cards__image').alt = this._title + '.';
 
     return this._cardElement;
   }
