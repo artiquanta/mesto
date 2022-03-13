@@ -1,9 +1,9 @@
 export default class Card {
-  constructor(data, cardSelector, callBack) {
+  constructor(data, cardSelector, handleCardClick) {
     this._cardSelector = cardSelector;
     this._title = data.title;
     this._link = data.link;
-    this._callBack = callBack;
+    this._handleCardClick = handleCardClick;
   }
 
   _getTemplate() { // Получаем шаблон карточки
@@ -37,7 +37,7 @@ export default class Card {
 
     // Слушатель клика по изображению карточки
     this._cardElement.querySelector('.cards__image').addEventListener('click', () => {
-      this._callBack(this._title, this._link);
+      this._handleCardClick(this._title, this._link);
     })
   }
 

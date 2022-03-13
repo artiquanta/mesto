@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="./pages/index.css">
   <title>Mesto: Russia</title>
 </head>
 
@@ -17,7 +16,7 @@
     <main class="content">
       <section class="profile content__profile">
         <div class="profile__info">
-          <img src="./images/avatar.jpg" alt="Аватар профиля пользователя." class="profile__avatar">
+          <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар профиля пользователя." class="profile__avatar">
           <div class="profile__author-info">
             <div class="profile__control">
               <h1 class="profile__author">Жак-Ив Кусто</h1>
@@ -39,7 +38,7 @@
   <template id="cards-template">
     <li class="cards__item">
       <button class="cards__remove-btn"></button>
-      <img class="cards__image" src="./images/cards__baikal.jpg" alt="Озеро Байкал.">
+      <img class="cards__image" src="<%=require('./images/cards__baikal.jpg')%>" alt="Озеро Байкал.">
       <div class="cards__description">
         <h2 class="cards__place">Озеро Байкал.</h2>
         <button class="cards__like-btn"></button>
@@ -53,12 +52,12 @@
       <form class="popup__inputs" novalidate>
         <h2 class="popup__heading">Редактировать профиль</h2>
         <label class="popup__field">
-          <input type="text" placeholder="Имя" class="popup__input popup__input_type_author" id="author-input"
+          <input type="text" placeholder="Имя" name="profileName" class="popup__input popup__input_type_author" id="author-input"
             minlength="2" maxlength="40" required>
           <span class="popup__input-error author-input-error"></span>
         </label>
         <label class="popup__field popup__field_position_bottom">
-          <input type="text" placeholder="О себе" class="popup__input popup__input_type_activity" id="activity-input"
+          <input type="text" placeholder="О себе" name="profileAbout" class="popup__input popup__input_type_activity" id="activity-input"
             minlength="2" maxlength="200" required>
           <span class="popup__input-error activity-input-error"></span>
         </label>
@@ -73,12 +72,12 @@
       <form class="popup__inputs" novalidate>
         <h2 class="popup__heading popup__heading_type_add-card">Новое место</h2>
         <label class="popup__field">
-          <input type="text" placeholder="Название" class="popup__input popup__input_type_place" id="place-input"
+          <input type="text" placeholder="Название" name="title" class="popup__input popup__input_type_place" id="place-input"
             minlength="2" maxlength="30" required>
           <span class="popup__input-error place-input-error"></span>
         </label>
         <label class="popup__field popup__field_position_bottom">
-          <input type="url" placeholder="Сслыка на картинку" class="popup__input popup__input_type_link" id="link-input"
+          <input type="url" placeholder="Сслыка на картинку" name="link" class="popup__input popup__input_type_link" id="link-input"
             required>
           <span class="popup__input-error link-input-error"></span>
         </label>
@@ -96,7 +95,6 @@
       </figure>
     </div>
   </div>
-  <script type="module" src="./scripts/index.js"></script>
 
 </body>
 
