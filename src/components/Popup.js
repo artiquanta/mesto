@@ -2,6 +2,7 @@ export default class Popup {
   constructor(selector) {
     this._popup = document.querySelector(selector);
     this._eventHandler = this._handleEscClose.bind(this);
+    this._closeHandler = this.close.bind(this);
   }
 
   _handleEscClose(evt) {
@@ -21,7 +22,7 @@ export default class Popup {
   }
 
   setEventListeners() {
-    this._popup.querySelector('.popup__overlay').addEventListener('click', this.close.bind(this));
-    this._popup.querySelector('.popup__close-btn').addEventListener('click', this.close.bind(this));
+    this._popup.querySelector('.popup__overlay').addEventListener('click', this._closeHandler);
+    this._popup.querySelector('.popup__close-btn').addEventListener('click', this._closeHandler);
   }
 }

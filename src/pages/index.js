@@ -23,19 +23,26 @@ import FormValidator from '../components/FormValidator.js';
 // Создание экземлпяра класса UserInfo
 const userInfo = new UserInfo({ nameSelector: '.profile__author', aboutSelector: '.profile__activity' });
 
+// Создание экземлпяра класса PopupWithImage
+const popupImage = new PopupWithImage('.popup_type_image');
+
 // Колбэк открытия попапа с изображением
 function initializePopupWithImage(title, link) {
-  const popupImage = new PopupWithImage({ link: link, name: title }, '.popup_type_image');
-  popupImage.open();
-  popupImage.setEventListeners();
+  popupImage.open({ name: title, link: link });
+}
+
+// Создание экземпляра карточки
+function createCard(item) {
+  const card = new Card(item, '#cards-template', initializePopupWithImage);
+  const addedCard = card.generateCard();
+  return addedCard;
 }
 
 // Наполнение страницы имеющимися карточками
 const cardList = new Section({
   items: initialCards,
   renderer: (item) => {
-    const card = new Card(item, '#cards-template', initializePopupWithImage);
-    const addedCard = card.generateCard();
+    const addedCard = createCard(item);
     cardList.addItem(addedCard);
   }
 },
@@ -57,17 +64,8 @@ const popupWithCardForm = new PopupWithForm(
   {
     selector: '.popup_type_cards',
     handleFormSubmit: (data) => {
-      const newCard = new Section({
-        items: [data],
-        renderer: (item) => {
-          const card = new Card(item, '#cards-template', initializePopupWithImage);
-          const addedCard = card.generateCard();
-          newCard.addItem(addedCard);
-        }
-      },
-        cardsPlace
-      );
-      newCard.renderItems();
+      const newCard = createCard(data);
+      cardList.addItem(newCard);
     }
   }
 );
@@ -86,6 +84,9 @@ profileFormValidation.enableValidation();
 const popupCardsFormValidation = new FormValidator(validationData, popupCardsForm);
 popupCardsFormValidation.enableValidation();
 
+
+// Добавление слушателя для модального окна просмотра карточки
+popupImage.setEventListeners();
 
 // Добавление слушателя для модального окна редактирования профиля
 popupWithProfileForm.setEventListeners();
