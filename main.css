@@ -58,7 +58,7 @@
 .popup__figure{display:flex;flex-direction:column;height:100%;justify-content:center;line-height:0;margin:0;overflow:hidden;width:100%}
 .popup__photo{max-height:75vh;-o-object-fit:contain;object-fit:contain;-o-object-position:center;object-position:center}
 .popup__caption{color:#fff;font-size:12px;line-height:1.21;margin-top:10px;max-height:30%}
-.popup-error{background-color:#fff;border-radius:10px;box-shadow:0 0 10px hsla(0,0%,100%,.8);font-family:Inter,Arial,sans-serif;font-size:14px;opacity:0;position:fixed;right:5vh;top:5vh;transition:.7s;visibility:hidden;width:270px}
+.popup-error{background-color:#fff;border-radius:10px;box-shadow:0 0 10px hsla(0,0%,100%,.8);font-family:Inter,Arial,sans-serif;font-size:14px;opacity:0;position:fixed;right:5vh;top:5vh;transition:.7s;visibility:hidden;width:270px}@media screen and (max-width:611px){.popup-error{right:50%;top:5vw;transform:translateX(50%)}}
 .popup-error_opened{opacity:1;visibility:visible}
 .popup-error__container{margin:20px}
 .popup-error__title{margin:0;padding:0}
