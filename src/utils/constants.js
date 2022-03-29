@@ -15,7 +15,6 @@ const profile = document.querySelector('.profile');
 export const profileEditBtn = profile.querySelector('.profile__edit-btn');
 export const profileAddBtn = profile.querySelector('.profile__add-btn');
 export const profileChangeAvatar = profile.querySelector('.profile__avatar');
-export const profileImage = profile.querySelector('.profile__avatar-img');
 
 // Модальное окно редактирования профиля
 const popupProfile = document.querySelector('.popup_type_profile');

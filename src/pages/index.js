@@ -7,29 +7,28 @@ import {
   profileEditBtn,
   profileAddBtn,
   profileChangeAvatar,
-  profileImage,
   popupProfileAuthor,
   popupProfileActivity,
   popupProfileForm,
   popupAvatarForm
 } from '../utils/constants.js';
 
-import Card from '../components/Card.js'
+import Card from '../components/Card.js';
+import PrivateCard from '../components/PrivateCard.js';
 import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
 import PopupWithForm from '../components/PopupWithForm.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithConfirmation from '../components/PopupWithConfirmation';
-import UserInfo from '../components/UserInfo.js';
+import PopupError from '../components/PopupError.js';
 import FormValidator from '../components/FormValidator.js';
 import Api from '../components/Api.js';
-import PrivateCard from '../components/PrivateCard.js';
-import PopupError from '../components/PopupError.js';
 
 // Переменная для записи _id текущего пользователя
 let currentUserId;
 
 // Создание экземлпяра класса UserInfo
-const userInfo = new UserInfo({ nameSelector: '.profile__author', aboutSelector: '.profile__activity' });
+const userInfo = new UserInfo({ nameSelector: '.profile__author', aboutSelector: '.profile__activity', avatarSelector: '.profile__avatar-img' });
 
 // Создание экземлпяра класса PopupWithImage
 const popupImage = new PopupWithImage('.popup_type_image');
@@ -56,16 +55,6 @@ const api = new Api({
   }
 });
 
-// Проверка запроса к серверу
-function checkFetch(res) {
-  if (res.ok) {
-    return res.json();
-  }
-
-  // Отклоняем запрос и вовзращаем код ошибки
-  return Promise.reject(res);
-}
-
 // Отображение ошибки при запросе к серверу
 function showError(code) {
   popupWithError.open(code);
@@ -85,7 +74,6 @@ function removeCard(cardId, card) {
 function toggleLike(card, cardId, isLiked) {
   if (isLiked) {
     api.removeLike(cardId)
-      .then(res => checkFetch(res))
       .then(res => {
         card.toggleLike(false);
         card.countLikes(res.likes);
@@ -93,7 +81,6 @@ function toggleLike(card, cardId, isLiked) {
       .catch(err => showError(err));
   } else {
     api.addLike(cardId)
-      .then(res => checkFetch(res))
       .then(res => {
         card.toggleLike(true);
         card.countLikes(res.likes);
@@ -110,8 +97,10 @@ const popupWithProfileForm = new PopupWithForm(
       // Отображаем статус запроса
       popupWithProfileForm.displayLoadingStatus(true);
       api.updateUserProfile(data.profileName, data.profileAbout)
-        .then(res => checkFetch(res))
-        .then(res => updateUserProfile(res))
+        .then(res => {
+          updateUserProfile(res);
+          popupWithProfileForm.close();
+        })
         .catch(err => showError(err))
         .finally(() => popupWithProfileForm.displayLoadingStatus(false));
     }
@@ -126,10 +115,10 @@ const popupWithCardForm = new PopupWithForm(
       // Отображаем статус запроса
       popupWithCardForm.displayLoadingStatus(true);
       api.addNewCard(data.title, data.link)
-        .then(res => checkFetch(res))
         .then(res => {
           const newCard = createCard(res);
           cardList.addItem(newCard);
+          popupWithCardForm.close();
         })
         .catch(err => showError(err))
         .finally(() => popupWithCardForm.displayLoadingStatus(false));
@@ -145,14 +134,15 @@ const popupWithAvatar = new PopupWithForm(
       // Отображаем статус запроса
       popupWithAvatar.displayLoadingStatus(true);
       api.updateAvatar(data.link)
-        .then(res => checkFetch(res))
-        .then(res => updateUserAvatar(res))
+        .then(res => {
+          updateUserAvatar(res);
+          popupWithAvatar.close();
+        })
         .catch(err => showError(err))
         .finally(() => popupWithAvatar.displayLoadingStatus(false));
     }
   }
 );
-
 
 // Модальное окно подтверждения удаления карточки
 const popupWithConfirmationForm = new PopupWithConfirmation(
@@ -160,9 +150,11 @@ const popupWithConfirmationForm = new PopupWithConfirmation(
     selector: '.popup_type_confirmation',
     handleFormSubmit: (id, card) => {
       api.removeCard(id)
-        .then(res => checkFetch(res))
-        .then(() => card.handleRemoveCard())
-        .catch(err => showError(err))
+        .then(() => {
+          card.handleRemoveCard();
+          popupWithConfirmationForm.close();
+        })
+        .catch(err => showError(err));
     }
   }
 );
@@ -180,19 +172,7 @@ function updateUserProfile(data) {
 
 // Обновление аватара пользователя
 function updateUserAvatar(data) {
-  profileImage.src = data.avatar;
-}
-
-// Заполняем профиль при заходе на страницу
-function fillProfile() {
-  api.getCurrentUser()
-    .then(res => checkFetch(res))
-    .then(res => {
-      updateUserProfile(res);
-      updateUserAvatar(res);
-      currentUserId = res._id;
-    })
-    .catch(err => showError(err));
+  userInfo.setUserAvatar(data);
 }
 
 // Создание экземпляра карточки
@@ -212,18 +192,19 @@ function createCard(item) {
   return addedCard;
 }
 
-// Получение существующих карточек с сервера
-function getCards() {
-  api.getInitialCards()
-    .then(res => checkFetch(res))
-    .then(res => cardList.renderItems(res.reverse()))
-    .catch(err => showError(err));
-}
-
 // Наполнение страницы имеющимися данными
 function fillPage() {
-  fillProfile();
-  getCards();
+  Promise.all([
+    api.getCurrentUser(),
+    api.getInitialCards()
+  ])
+    .then(([userData, existingCards]) => {
+      updateUserProfile(userData);
+      updateUserAvatar(userData);
+      currentUserId = userData._id;
+      cardList.renderItems(existingCards.reverse())
+    })
+    .catch(err => showError(err));
 }
 
 

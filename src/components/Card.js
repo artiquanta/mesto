@@ -20,38 +20,45 @@ export default class Card {
 
   toggleLike(isLiked) { // изменение состояния сердечка на карточке
     if (isLiked) {
-      this._cardElement.querySelector('.cards__like-btn').classList.add('cards__like-btn_active');
+      this._cardLikeBtn.classList.add('cards__like-btn_active');
       this._isLiked = true;
     } else {
-      this._cardElement.querySelector('.cards__like-btn').classList.remove('cards__like-btn_active');
+      this._cardLikeBtn.classList.remove('cards__like-btn_active');
       this._isLiked = false;
     }
   }
 
   countLikes(likes) {
     this._likeCount = likes.length;
-    this._cardElement.querySelector('.cards__like-count').textContent = this._likeCount;
+    this._cardLikeCount.textContent = this._likeCount;
   }
 
   _setEventListeners() { // добавление слушателей
     // Слушатель кнопки сердечка
-    this._cardElement.querySelector('.cards__like-btn').addEventListener('click', () => {
+    this._cardLikeBtn.addEventListener('click', () => {
       this._handleToggleLike(this, this._cardId, this._isLiked);
     });
 
     // Слушатель клика по изображению карточки
-    this._cardElement.querySelector('.cards__image').addEventListener('click', () => {
+    this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._title, this._link);
     })
   }
 
   generateCard() { // создание карточки
     this._cardElement = this._getTemplate();
+
+    // поиск элементов карточки
+    this._cardImage = this._cardElement.querySelector('.cards__image');
+    this._cardLikeBtn = this._cardElement.querySelector('.cards__like-btn');
+    this._cardLikeCount = this._cardElement.querySelector('.cards__like-count');
+    
+    // добавление слушателей
     this._setEventListeners();
     this._cardElement.querySelector('.cards__place').textContent = this._title;
-    this._cardElement.querySelector('.cards__image').src = this._link;
-    this._cardElement.querySelector('.cards__image').alt = this._title + '.';
-    this._cardElement.querySelector('.cards__like-count').textContent = this._likeCount;
+    this._cardImage.src = this._link;
+    this._cardImage.alt = this._title + '.';
+    this._cardLikeCount.textContent = this._likeCount;
 
     return this._cardElement;
   }

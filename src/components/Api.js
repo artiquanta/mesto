@@ -9,6 +9,7 @@ export default class Api {
       method: 'GET',
       headers: this._headers
     })
+      .then(res => this._checkFetch(res))
   }
 
   getInitialCards() {
@@ -16,6 +17,7 @@ export default class Api {
       method: 'GET',
       headers: this._headers
     })
+      .then(res => this._checkFetch(res))
   }
 
   updateUserProfile(name, about) {
@@ -27,6 +29,7 @@ export default class Api {
         about: about
       })
     })
+      .then(res => this._checkFetch(res))
   }
 
   addNewCard(name, link) {
@@ -38,6 +41,7 @@ export default class Api {
         link: link
       })
     })
+      .then(res => this._checkFetch(res))
   }
 
   removeCard(id) {
@@ -45,6 +49,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
+      .then(res => this._checkFetch(res))
   }
 
   addLike(id) {
@@ -52,6 +57,7 @@ export default class Api {
       method: 'PUT',
       headers: this._headers
     })
+      .then(res => this._checkFetch(res))
   }
 
   removeLike(id) {
@@ -59,6 +65,7 @@ export default class Api {
       method: 'DELETE',
       headers: this._headers
     })
+      .then(res => this._checkFetch(res))
   }
 
   updateAvatar(link) {
@@ -69,5 +76,14 @@ export default class Api {
         avatar: link
       })
     })
+      .then(res => this._checkFetch(res))
+  }
+
+  _checkFetch(res) {
+    if (res.ok) {
+      return res.json();
+    }
+
+    return Promise.reject(res);
   }
 }
