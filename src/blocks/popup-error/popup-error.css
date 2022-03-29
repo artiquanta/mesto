@@ -1,0 +1,14 @@
+.popup-error {
+  position: fixed;
+  top: 5vh;
+  right: 5vh;
+  width: 270px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  font-family: 'Inter', Arial, sans-serif;
+  font-size: 14px;
+  visibility: hidden;
+  opacity: 0;
+  transition: .7s;
+}

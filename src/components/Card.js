@@ -1,9 +1,12 @@
 export default class Card {
-  constructor(data, cardSelector, handleCardClick) {
+  constructor(data, cardSelector, handleCardClick, handleToggleLike) {
     this._cardSelector = cardSelector;
-    this._title = data.title;
+    this._title = data.name;
     this._link = data.link;
+    this._likeCount = data.likes.length;
+    this._cardId = data._id;
     this._handleCardClick = handleCardClick;
+    this._handleToggleLike = handleToggleLike;
   }
 
   _getTemplate() { // Получаем шаблон карточки
@@ -15,24 +18,25 @@ export default class Card {
     return cardTemplateElement;
   }
 
-  _handleRemoveCard() { // удаление карточки
-    this._cardElement.remove();
-    this._cardElement = null;
+  toggleLike(isLiked) { // изменение состояния сердечка на карточке
+    if (isLiked) {
+      this._cardElement.querySelector('.cards__like-btn').classList.add('cards__like-btn_active');
+      this._isLiked = true;
+    } else {
+      this._cardElement.querySelector('.cards__like-btn').classList.remove('cards__like-btn_active');
+      this._isLiked = false;
+    }
   }
 
-  _handleToggleLike() { // изменение состояния сердечка на карточке
-    this._cardElement.querySelector('.cards__like-btn').classList.toggle('cards__like-btn_active');
+  countLikes(likes) {
+    this._likeCount = likes.length;
+    this._cardElement.querySelector('.cards__like-count').textContent = this._likeCount;
   }
 
   _setEventListeners() { // добавление слушателей
-    // Слушатель кнопки удаления карточки
-    this._cardElement.querySelector('.cards__remove-btn').addEventListener('click', () => {
-      this._handleRemoveCard();
-    });
-
     // Слушатель кнопки сердечка
     this._cardElement.querySelector('.cards__like-btn').addEventListener('click', () => {
-      this._handleToggleLike();
+      this._handleToggleLike(this, this._cardId, this._isLiked);
     });
 
     // Слушатель клика по изображению карточки
@@ -47,6 +51,7 @@ export default class Card {
     this._cardElement.querySelector('.cards__place').textContent = this._title;
     this._cardElement.querySelector('.cards__image').src = this._link;
     this._cardElement.querySelector('.cards__image').alt = this._title + '.';
+    this._cardElement.querySelector('.cards__like-count').textContent = this._likeCount;
 
     return this._cardElement;
   }

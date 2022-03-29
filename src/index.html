@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="<%=require('./images/favicon.svg')%>" tpye="image/svg+xml">
   <title>Mesto: Russia</title>
 </head>
 
@@ -16,13 +17,16 @@
     <main class="content">
       <section class="profile content__profile">
         <div class="profile__info">
-          <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар профиля пользователя." class="profile__avatar">
+          <div class="profile__avatar">
+            <div class="profile__avatar-overlay"></div>
+            <img src="" alt="Аватар профиля пользователя." class="profile__avatar-img">
+          </div>
           <div class="profile__author-info">
             <div class="profile__control">
-              <h1 class="profile__author">Жак-Ив Кусто</h1>
+              <h1 class="profile__author"></h1>
               <button class="profile__edit-btn"></button>
             </div>
-            <p class="profile__activity">Исследователь океана</p>
+            <p class="profile__activity"></p>
           </div>
         </div>
         <button class="profile__add-btn"></button>
@@ -35,13 +39,28 @@
       <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
     </footer>
   </div>
-  <template id="cards-template">
+  <template id="cards-template-owner">
     <li class="cards__item">
       <button class="cards__remove-btn"></button>
-      <img class="cards__image" src="<%=require('./images/cards__baikal.jpg')%>" alt="Озеро Байкал.">
+      <img class="cards__image" src="" alt="">
       <div class="cards__description">
-        <h2 class="cards__place">Озеро Байкал.</h2>
-        <button class="cards__like-btn"></button>
+        <h2 class="cards__place"></h2>
+        <div class="cards__likes">
+          <button class="cards__like-btn"></button>
+          <p class="cards__like-count"></p>
+        </div>
+      </div>
+    </li>
+  </template>
+  <template id="cards-template-viewer">
+    <li class="cards__item">
+      <img class="cards__image" src="" alt="">
+      <div class="cards__description">
+        <h2 class="cards__place"></h2>
+        <div class="cards__likes">
+          <button class="cards__like-btn"></button>
+          <p class="cards__like-count"></p>
+        </div>
       </div>
     </li>
   </template>
@@ -52,13 +71,13 @@
       <form class="popup__inputs" novalidate>
         <h2 class="popup__heading">Редактировать профиль</h2>
         <label class="popup__field">
-          <input type="text" placeholder="Имя" name="profileName" class="popup__input popup__input_type_author" id="author-input"
-            minlength="2" maxlength="40" required>
+          <input type="text" placeholder="Имя" name="profileName" class="popup__input popup__input_type_author"
+            id="author-input" minlength="2" maxlength="40" required>
           <span class="popup__input-error author-input-error"></span>
         </label>
         <label class="popup__field popup__field_position_bottom">
-          <input type="text" placeholder="О себе" name="profileAbout" class="popup__input popup__input_type_activity" id="activity-input"
-            minlength="2" maxlength="200" required>
+          <input type="text" placeholder="О себе" name="profileAbout" class="popup__input popup__input_type_activity"
+            id="activity-input" minlength="2" maxlength="200" required>
           <span class="popup__input-error activity-input-error"></span>
         </label>
         <button class="popup__submit-btn popup__submit-btn_place_edit-profile" type="submit">Сохранить</button>
@@ -70,15 +89,15 @@
     <div class="popup__container popup__container_content_form">
       <button class="popup__close-btn"></button>
       <form class="popup__inputs" novalidate>
-        <h2 class="popup__heading popup__heading_type_add-card">Новое место</h2>
+        <h2 class="popup__heading popup__heading_type_left-side">Новое место</h2>
         <label class="popup__field">
-          <input type="text" placeholder="Название" name="title" class="popup__input popup__input_type_place" id="place-input"
-            minlength="2" maxlength="30" required>
+          <input type="text" placeholder="Название" name="title" class="popup__input popup__input_type_place"
+            id="place-input" minlength="2" maxlength="30" required>
           <span class="popup__input-error place-input-error"></span>
         </label>
         <label class="popup__field popup__field_position_bottom">
-          <input type="url" placeholder="Сслыка на картинку" name="link" class="popup__input popup__input_type_link" id="link-input"
-            required>
+          <input type="url" placeholder="Сслыка на картинку" name="link" class="popup__input popup__input_type_link"
+            id="link-input" required>
           <span class="popup__input-error link-input-error"></span>
         </label>
         <button class="popup__submit-btn popup__submit-btn_place_cards" type="submit">Создать</button>
@@ -90,9 +109,41 @@
     <div class="popup__container popup__container_content_image">
       <button class="popup__close-btn"></button>
       <figure class="popup__figure">
-        <img src="<%=require('./images/cards__baikal.jpg')%>" alt="Озеро Байкал." class="popup__photo">
-        <figcaption class="popup__caption">Озеро Байкал.</figcaption>
+        <img src="" alt="" class="popup__photo">
+        <figcaption class="popup__caption"></figcaption>
       </figure>
+    </div>
+  </div>
+  <div class="popup popup_type_confirmation">
+    <div class="popup__overlay"></div>
+    <div class="popup__container popup__container_content_form">
+      <button class="popup__close-btn"></button>
+      <form class="popup__inputs">
+        <h2 class="popup__heading popup__heading_type_left-side">Вы уверены?</h2>
+        <button class="popup__submit-btn popup__submit-btn_place_confirmation" type="submit">Да</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup popup_type_avatar">
+    <div class="popup__overlay"></div>
+    <div class="popup__container popup__container_content_form">
+      <button class="popup__close-btn"></button>
+      <form class="popup__inputs" novalidate>
+        <h2 class="popup__heading popup__heading_type_left-side">Обновить аватар</h2>
+        <label class="popup__field">
+          <input type="url" placeholder="Сслыка на картинку" name="link" class="popup__input popup__input_type_link"
+            id="link-input" required>
+          <span class="popup__input-error link-input-error"></span>
+        </label>
+        <button class="popup__submit-btn popup__submit-btn_place_avatar" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </div>
+  <div class="popup-error">
+    <div class="popup-error__container">
+      <p class="popup-error__title">К сожалению, при выполнении запроса произошла ошибка.</p>
+      <p class="popup-error__description"></p>
+      <p class="popup-error__code"></p>
     </div>
   </div>
 

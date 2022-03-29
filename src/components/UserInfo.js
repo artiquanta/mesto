@@ -13,7 +13,7 @@ export default class UserInfo {
   }
 
   setUserInfo(formValues) {
-    this._name.textContent = formValues.profileName;
-    this._about.textContent = formValues.profileAbout;
+    this._name.textContent = formValues.name;
+    this._about.textContent = formValues.about;
   }
 }
