@@ -4,11 +4,19 @@
   right: 5vh;
   width: 270px;
   background-color: #fff;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
   font-family: 'Inter', Arial, sans-serif;
   font-size: 14px;
   visibility: hidden;
   opacity: 0;
   transition: .7s;
+}
+
+@media screen and (max-width: 611px) {
+  .popup-error {
+    top: 5vw;
+    right: 50%;
+    transform: translateX(+50%)
+  }
 }
