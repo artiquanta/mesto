@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="<%=require('./images/favicon.svg')%>" tpye="image/svg+xml">
+  <link rel="icon" href="<%=require('./images/favicon.svg')%>" type="image/svg+xml">
   <title>Mesto: Russia</title>
 </head>
 
@@ -19,7 +19,7 @@
         <div class="profile__info">
           <div class="profile__avatar">
             <div class="profile__avatar-overlay"></div>
-            <img src="" alt="Аватар профиля пользователя." class="profile__avatar-img">
+            <img src="#" alt="Аватар профиля пользователя." class="profile__avatar-img">
           </div>
           <div class="profile__author-info">
             <div class="profile__control">
@@ -42,7 +42,7 @@
   <template id="cards-template-owner">
     <li class="cards__item">
       <button class="cards__remove-btn"></button>
-      <img class="cards__image" src="" alt="">
+      <img class="cards__image" src="#" alt="">
       <div class="cards__description">
         <h2 class="cards__place"></h2>
         <div class="cards__likes">
@@ -54,7 +54,7 @@
   </template>
   <template id="cards-template-viewer">
     <li class="cards__item">
-      <img class="cards__image" src="" alt="">
+      <img class="cards__image" src="#" alt="">
       <div class="cards__description">
         <h2 class="cards__place"></h2>
         <div class="cards__likes">
@@ -109,7 +109,7 @@
     <div class="popup__container popup__container_content_image">
       <button class="popup__close-btn"></button>
       <figure class="popup__figure">
-        <img src="" alt="" class="popup__photo">
+        <img src="#" alt="" class="popup__photo">
         <figcaption class="popup__caption"></figcaption>
       </figure>
     </div>
@@ -132,8 +132,8 @@
         <h2 class="popup__heading popup__heading_type_left-side">Обновить аватар</h2>
         <label class="popup__field">
           <input type="url" placeholder="Сслыка на картинку" name="link" class="popup__input popup__input_type_link"
-            id="link-input" required>
-          <span class="popup__input-error link-input-error"></span>
+            id="avatar-link-input" required>
+          <span class="popup__input-error avatar-link-input-error"></span>
         </label>
         <button class="popup__submit-btn popup__submit-btn_place_avatar" type="submit">Сохранить</button>
       </form>

@@ -17,6 +17,6 @@
   .popup-error {
     top: 5vw;
     right: 50%;
-    transform: translateX(+50%)
+    transform: translateX(+50%);
   }
 }
